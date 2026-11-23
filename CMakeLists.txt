@@ -15,6 +15,16 @@ message(STATUS "Using vcpkg at: $ENV{CHARACTER_STUDIO_VCPKG_ROOT}")
 
 project(CharacterStudio VERSION 0.1.0 LANGUAGES CXX)
 
+# Libraries from vcpkg are built with the newest MSVC toolset on the machine. An
+# older linker (VS 2022 before 17.10, MSVC 14.38 and below) cannot link them and fails
+# with "unresolved external symbol __std_find_..." errors.
+if(MSVC AND MSVC_VERSION LESS 1940)
+    message(FATAL_ERROR
+        "Your C++ compiler is too old (MSVC_VERSION ${MSVC_VERSION}, need 1940 or newer).\n"
+        "Open the Visual Studio Installer and click Update on Visual Studio 2022 (17.10 or newer), "
+        "then delete the build folder and run build.bat again.")
+endif()
+
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
