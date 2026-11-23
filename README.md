@@ -58,12 +58,18 @@ Character Studio is an SKSE plugin with its menu inside [SKSE Menu Framework](ht
 
 ### Build
 
-Open the folder in Visual Studio (**File → Open → Folder**), pick the **Release** preset and choose **Build → Build All**. From a *Developer PowerShell for VS 2022*, you can instead run:
+The simplest way is the terminal inside Visual Studio:
 
-```powershell
-cmake --preset release
-cmake --build --preset release
-```
+1. Open Visual Studio and choose **File → Open → Folder**. Pick the repo folder.
+2. Wait for the Output window to say **"CMake generation finished."**
+3. Open the terminal with **View → Terminal**. It opens a *Developer PowerShell* in the repo folder.
+4. Type this and press Enter:
+   ```powershell
+   cmake --build --preset release
+   ```
+5. When it ends with a line like `Linking CXX shared library CharacterStudio.dll`, the build is done.
+
+If you prefer the menus: if the **Build** menu shows `samples_vs2010.sln`, Visual Studio is showing a sample project from inside a submodule, not this project. Go to **Solution Explorer** and click the **Switch Views** button (the icon with two windows at the top of the panel). Choose **CMake Targets View**. Then right-click **CharacterStudio** and choose **Build**.
 
 The first build takes a while because vcpkg compiles the dependencies and CommonLibSSE-NG. Later builds are quick.
 
