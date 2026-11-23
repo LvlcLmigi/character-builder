@@ -38,12 +38,13 @@ Character Studio is an SKSE plugin with its menu inside [SKSE Menu Framework](ht
 ### One-time setup
 
 1. Install **Visual Studio 2022** (Community is fine) with the **Desktop development with C++** workload. It includes CMake and Ninja.
-2. Install **vcpkg** and set the `VCPKG_ROOT` environment variable to its folder:
+2. Install your own copy of **vcpkg** and point `CHARACTER_STUDIO_VCPKG_ROOT` at it. Don't use the copy that ships with Visual Studio: it fails with "Cannot find port ... detect_compiler". Visual Studio also overwrites `VCPKG_ROOT` with its own copy, which is why this project uses its own variable name.
    ```powershell
-   git clone https://github.com/microsoft/vcpkg C:\dev\vcpkg
-   C:\dev\vcpkg\bootstrap-vcpkg.bat
-   setx VCPKG_ROOT C:\dev\vcpkg
+   git clone https://github.com/microsoft/vcpkg J:\vcpkg
+   J:\vcpkg\bootstrap-vcpkg.bat
+   setx CHARACTER_STUDIO_VCPKG_ROOT J:\vcpkg
    ```
+   Then close Visual Studio completely and open it again, so it picks up the new variable.
 3. Clone this repo **with submodules** (CommonLibSSE-NG is a submodule):
    ```powershell
    git clone --recursive https://github.com/LvlcLmigi/character-builder

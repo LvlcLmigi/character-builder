@@ -1,5 +1,18 @@
 cmake_minimum_required(VERSION 3.21)
 
+# ---------------------------------------------------------------------------
+# vcpkg: use your own vcpkg clone, not the copy bundled with Visual Studio.
+# Visual Studio overwrites VCPKG_ROOT inside its own environment, so this project
+# reads CHARACTER_STUDIO_VCPKG_ROOT instead (see README, "One-time setup").
+# ---------------------------------------------------------------------------
+if(NOT DEFINED ENV{CHARACTER_STUDIO_VCPKG_ROOT} OR NOT EXISTS "$ENV{CHARACTER_STUDIO_VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
+    message(FATAL_ERROR
+        "vcpkg not found. Clone vcpkg (for example to J:\\vcpkg), run its bootstrap-vcpkg.bat, then run\n"
+        "  setx CHARACTER_STUDIO_VCPKG_ROOT J:\\vcpkg\n"
+        "and restart Visual Studio. Current value: '$ENV{CHARACTER_STUDIO_VCPKG_ROOT}'")
+endif()
+message(STATUS "Using vcpkg at: $ENV{CHARACTER_STUDIO_VCPKG_ROOT}")
+
 project(CharacterStudio VERSION 0.1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 23)
