@@ -1,0 +1,13 @@
+# Build output
+build/
+install/
+out/
+cmake-build*/
+vcpkg_installed/
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.user
+CMakeUserPresets.json
